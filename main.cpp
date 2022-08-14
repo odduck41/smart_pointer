@@ -6,11 +6,20 @@ class SmartPointer;
 template <typename T, int l>
 std::ostream &operator<<(std::ostream &os, SmartPointer<T, l> &sp);
 
-
-template<class T, int length = 1>
+template<class T, int length>
 class SmartPointer{
 public:
     const int& size = size_;
+    SmartPointer(SmartPointer& x){
+        if(length<x.size) {
+            throw std::out_of_range("You need to allocate more or the same amount of memory as the copied pointer");
+        }
+        obj = new T[length];
+        for (int i = 0; i < x.size; ++i) {
+            obj[i] = x.obj[i];
+        }
+        size_ = length;
+    }
     SmartPointer(){
         if(length>1){
             obj = new T[length];
@@ -44,20 +53,13 @@ public:
     /*T* operator~(){
         return obj;
     }*/
-
 private:
     T* obj;
     int size_;
     friend std::ostream &operator<< <>(std::ostream &os, SmartPointer<T, length> &sp);
 };
-
 template <typename T, int l>
 std::ostream &operator<<(std::ostream &os, SmartPointer<T, l> &sp){
     return os << sp.obj;
 }
-int main(){
-    //SmartPointer<int, 1> a;
-    SmartPointer<int> a;
-    //std::cout<<~a;
-    std::cout<<a;
-}
+
