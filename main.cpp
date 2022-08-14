@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 
-template<class T, int length>
+template<class T, int length = 1>
 class SmartPointer{
 public:
     const int& size = size_;
@@ -60,7 +60,8 @@ std::ostream &operator<<(std::ostream &os, SmartPointer<T, l> &sp){
     return os << sp.obj;
 }
 int main(){
-    SmartPointer<int, 1> a;
+    //SmartPointer<int, 1> a;
+    SmartPointer<int> a;
     //std::cout<<~a;
     std::cout<<a;
 }
