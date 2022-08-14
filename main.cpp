@@ -1,20 +1,16 @@
 #include <iostream>
 #include <stdexcept>
 
+template<class T, int length = 1>
+class SmartPointer;
+template <typename T, int l>
+std::ostream &operator<<(std::ostream &os, SmartPointer<T, l> &sp);
+
 
 template<class T, int length = 1>
 class SmartPointer{
 public:
     const int& size = size_;
-    SmartPointer(int val){
-        if(length>1){
-            obj = new T[length];
-            *obj = val;
-        }else if(length==1){
-            obj = new T;
-        }
-        size_ = length;
-    }
     SmartPointer(){
         if(length>1){
             obj = new T[length];
