@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 
+
 template<class T, int length>
 class SmartPointer{
 public:
@@ -40,20 +41,26 @@ public:
     }
     T& operator+(int index){
         if (index<length){
-            return obj+index;
+            return obj[index];
         }
         throw std::out_of_range("You are accessing forbidden memory");
     }
-    T* operator~(){
+    /*T* operator~(){
         return obj;
-    }
+    }*/
 
 private:
     T* obj;
     int size_;
+    friend std::ostream &operator<< <>(std::ostream &os, SmartPointer<T, length> &sp);
 };
 
+template <typename T, int l>
+std::ostream &operator<<(std::ostream &os, SmartPointer<T, l> &sp){
+    return os << sp.obj;
+}
 int main(){
-    SmartPointer<int, 10> a;
-    std::cout<<~a;
+    SmartPointer<int, 1> a;
+    //std::cout<<~a;
+    std::cout<<a;
 }
