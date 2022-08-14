@@ -11,9 +11,6 @@ class SmartPointer{
 public:
     const int& size = size_;
     SmartPointer(SmartPointer& x){
-        if(length<x.size) {
-            throw std::out_of_range("You need to allocate more or the same amount of memory as the copied pointer");
-        }
         obj = new T[length];
         for (int i = 0; i < x.size; ++i) {
             obj[i] = x.obj[i];
