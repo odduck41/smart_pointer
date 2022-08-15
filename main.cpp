@@ -41,9 +41,9 @@ public:
         }
         throw std::out_of_range("You are accessing forbidden memory");
     }
-    T& operator+(int index){
+    T* operator+(int index){
         if (index<length){
-            return obj[index];
+            return obj+index;
         }
         throw std::out_of_range("You are accessing forbidden memory");
     }
